@@ -1,10 +1,8 @@
 import { request } from "../utils";
 import { Data } from "../types";
+import URLS from "@/lib/data";
 
 export async function getMod(id: string) {
-    const data = await request<Data[]>('https://raw.githubusercontent.com/Anuken/MindustryMods/master/mods.json')
-    for (var item of data) {
-        const modID = item.repo.split('/')[1]
-        if (modID == id) return item
-    }
+    const data = await request<Data[]>(URLS.MODS_JSON)
+    return data.find(item => item.repo.split("/")[1] == id)
 }

@@ -1,13 +1,12 @@
 import CustomHead from "@/components/Head"
 import DefaultPage from "@/lib/default"
-import { Data, ServerType } from "@/lib/types"
+import { ServerType } from "@/lib/types"
 import { GetServerSideProps, InferGetServerSidePropsType } from "next"
 import { useEffect } from "react"
 import Navbar from "@/components/Navbar"
 import ServerListElement from "@/components/lists/ServerListElement"
 import Pagination from "@/components/search/Pagination"
-import SidebarFilters from "@/components/search/SidebarFilters"
-import SearchBar, { ServerSearchBar } from "@/components/search/SearchBar"
+import { ServerSearchBar } from "@/components/search/SearchBar"
 import { getProps } from "@/lib/server"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {

@@ -1,7 +1,6 @@
 import Head from '@/components/Head'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { getProps } from '@/lib/server/server'
-import Markdown from '@/components/Markdown'
 import Navbar from '@/components/Navbar'
 import ServerInfo from '@/components/server/ServerInfo'
 

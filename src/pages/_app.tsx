@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/brands.min.css'
 import '@fortawesome/fontawesome-free/css/solid.min.css'
 import type { AppProps } from 'next/app'
 import { useEffect } from 'react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export default function App({ Component, pageProps }: AppProps) {
     useEffect(() => {
@@ -13,5 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
         
     }, [])
-    return <Component {...pageProps} />
+    return (
+        <>
+            <Component {...pageProps} />
+            <SpeedInsights />
+        </>
+    )
 }

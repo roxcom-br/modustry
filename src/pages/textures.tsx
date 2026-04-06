@@ -8,7 +8,7 @@ import ListElement from "@/components/lists/ModListElement"
 import Pagination from "@/components/search/Pagination"
 import SidebarFilters from "@/components/search/SidebarFilters"
 import SearchBar from "@/components/search/SearchBar"
-import { modsFilter, textureFilter } from "@/lib/filter"
+import { textureFilter } from "@/lib/filter"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const props = await getProps(ctx)
@@ -16,8 +16,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 export default function Mods({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const data2 = textureFilter(data)
-    const manager = new DefaultPage(data2)
+    const textures = textureFilter(data)
+    const manager = new DefaultPage(textures)
 
     useEffect(() => {
         manager.update()
@@ -29,9 +29,9 @@ export default function Mods({ data }: InferGetServerSidePropsType<typeof getSer
             <main className="shadow">
                 <Navbar />
                 <section className="container p-0">
-                    <SidebarFilters data={data2} manager={manager} />
+                    <SidebarFilters data={textures} manager={manager} />
                     <div className="mods-list list-group list-group-flush scrollarea">
-                        <SearchBar data={data2} manager={manager} />
+                        <SearchBar data={textures} manager={manager} />
                         {manager.results && manager.results.map((value: Data, index: number, _array: Data[]) => (
                             <>
                                 {!manager.query && index < manager.perPage && <ListElement value={value} key={value.repo} />}

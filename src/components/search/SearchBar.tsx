@@ -13,15 +13,14 @@ export type SearchInput<T> = {
 export default function SearchBar<T>({ data, manager }: SearchInput<T>) {
     const searchRef = useRef(null)
     const [query, setQuery] = useState<string>("")
-    const [results, setResults] = useState<Data[]>([])
 
     /* SEARCH BAR */
     const onChange = useCallback(async (event: React.ChangeEvent<HTMLInputElement>) => {
         const query = event.target.value;
         manager.setQuery(query)
         setQuery(query)
-        if (query.length) manager.setResults(libQuery(data, query, manager.loader, manager.category, manager.version))
-        else if (!query.length) manager.setResults(data)
+        if (query.length) manager.setResults(sliceIntoChunks(libQuery(data, query, manager.loader, manager.category, manager.version), manager.perPage))
+        else if (!query.length) manager.setResults(sliceIntoChunks(data, manager.perPage))
         else manager.setResults([])
     }, [])
 

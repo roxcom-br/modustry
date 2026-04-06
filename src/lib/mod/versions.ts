@@ -1,6 +1,5 @@
 import { Data, GithubRelease } from '@/lib/types'
 import { GetServerSidePropsContext } from 'next'
-import { ParsedUrlQuery } from 'querystring'
 import { remark } from 'remark'
 import html from 'remark-html'
 

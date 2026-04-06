@@ -16,8 +16,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 }
 
 export default function Mods({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    const data2 = modsFilter(data)
-    const manager = new DefaultPage(data2)
+    const mods = modsFilter(data)
+    const manager = new DefaultPage(mods)
 
     useEffect(() => {
         manager.update()
@@ -29,9 +29,9 @@ export default function Mods({ data }: InferGetServerSidePropsType<typeof getSer
             <main className="shadow">
                 <Navbar />
                 <section className="container p-0">
-                    <SidebarFilters data={data2} manager={manager} />
+                    <SidebarFilters data={mods} manager={manager} />
                     <div className="mods-list list-group list-group-flush scrollarea">
-                        <SearchBar data={data2} manager={manager} />
+                        <SearchBar data={mods} manager={manager} />
                         {manager.results && manager.results.map((value: Data, index: number, _array: Data[]) => (
                             <>
                                 {!manager.query && index < manager.perPage && <ListElement value={value} key={value.repo} />}

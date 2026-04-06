@@ -1,4 +1,4 @@
-import { Data, GithubRelease } from '@/lib/types'
+import { Data } from '@/lib/types'
 import { GetStaticPropsContext } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 

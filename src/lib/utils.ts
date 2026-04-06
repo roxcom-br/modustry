@@ -1,4 +1,4 @@
-import { Data, GithubRelease } from '@/lib/types'
+import { GithubRelease } from '@/lib/types'
 import { remark } from 'remark';
 import html from 'remark-html';
 

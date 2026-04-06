@@ -4,12 +4,7 @@ import { request } from "../utils"
 export async function getVersionList() {
     const db = await fetch(`https://api.github.com/repos/Anuken/Mindustry/releases?per_page=100`)
     const json: ReleaseData[] = await db.json()
-
-    var versions = []
-    for (var i in json) {
-        versions.push(json[i].tag_name.replace('v', ''))
-    }
-    return versions
+    return json.map(x => x.tag_name.replace('v', ''))
 }
 
 export async function getVersion(id: string) {

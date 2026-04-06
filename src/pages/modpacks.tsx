@@ -8,8 +8,7 @@ import ListElement from "@/components/lists/ModListElement"
 import Pagination from "@/components/search/Pagination"
 import SidebarFilters from "@/components/search/SidebarFilters"
 import SearchBar from "@/components/search/SearchBar"
-import { modpackFilter, modsFilter } from "@/lib/filter"
-import SidebarModpacks from "@/components/search/SidebarModpacks"
+import { modpackFilter } from "@/lib/filter"
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const props = await getProps(ctx)

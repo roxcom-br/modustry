@@ -1,8 +1,9 @@
 import { request } from "../utils";
 import { Data, GithubData } from "../types";
+import URLS from "@/lib/data";
 
 export async function getUser(id: string) {
-    const data = await request<Data[]>('https://raw.githubusercontent.com/Anuken/MindustryMods/master/mods.json')
+    const data = await request<Data[]>(URLS.MODS_JSON)
     for (var user of data) {
         const username = user.repo.split('/')[0]
         if (username == id) {
@@ -14,12 +15,6 @@ export async function getUser(id: string) {
 }
 
 export async function getUserProjects(id: string) {
-    const data = await request<Data[]>('https://raw.githubusercontent.com/Anuken/MindustryMods/master/mods.json')
-    var mods = []
-    for (var mod of data) {
-        if (mod.author == id) {
-            mods.push(mod)
-        }
-    }
-    return mods
+    const data = await request<Data[]>(URLS.MODS_JSON)
+    return data.filter(mod => mod.author == id)
 }
