@@ -8,8 +8,16 @@ export async function GET(request: Request) {
     const page = parsePositiveInt(searchParams.get('page'), 1)
     const limit = parsePositiveInt(searchParams.get('limit'), 20)
 
-    const data = await getCache()
-    const mods = Array.isArray(data) ? data : []
+    let mods = await getCache()
+
+    const q = searchParams.get('q')?.toLowerCase() ?? ""
+
+    mods = mods.filter(x =>
+        x.name.toLowerCase().includes(q) ||
+        x.author.toLowerCase().includes(q) ||
+        x.repo.toLowerCase().includes(q) ||
+        x.description.toLowerCase().includes(q)
+    )
 
     const start = (page - 1) * limit
     const end = start + limit
