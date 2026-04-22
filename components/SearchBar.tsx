@@ -8,7 +8,7 @@ type SearchBar = {
 }
 
 export default function SearchBar({ query, onQueryChange }: SearchBar) {
-    const [input, setInput] = useState(query)
+    const [input, setInput] = useState(query ?? '')
 
     useEffect(() => {
         setInput(query)
