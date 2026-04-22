@@ -45,8 +45,18 @@ export const getServersCache = unstable_cache(
         let v6 = await v6res.json()
         let v7 = await v7res.json()
 
-        v6 = v6.map((x: any) => ({ ...x, version: "v6" }))
-        v7 = v7.map((x: any) => ({ ...x, version: "v7" }))
+        v6 = v6.map((x: any) => ({
+            id: x.name.replace(/[^a-zA-Z0-9]/g, "").toLowerCase(),
+            name: x.name,
+            address: x.address,
+            version: "v6"
+        }))
+        v7 = v7.map((x: any) => ({
+            id: x.name.replace(/[^a-zA-Z0-9]/g, "").toLowerCase(),
+            name: x.name,
+            address: x.address,
+            version: "v7"
+        }))
 
         return [...v6, ...v7] as Server[]
     },
