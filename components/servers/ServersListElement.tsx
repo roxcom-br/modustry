@@ -5,7 +5,7 @@ import Image from "@/components/utils/Image"
 export default function ServersListElement({ data }: { data: Server }) {
     return (
         <Link
-            href={""}
+            href={`/server/${data.id}`}
             aria-current="true"
             key={`${data.name}-${data.version}-${data.address.length}`}
             className="flex items-center gap-3 mb-4 rounded-xl transition bg-(--scheme-color-secondary)"
