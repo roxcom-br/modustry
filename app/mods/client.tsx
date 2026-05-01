@@ -1,5 +1,6 @@
 'use client'
 
+import FiltersBar from "@/components/FiltersBar";
 import ModsListElement from "@/components/mods/ModsListElement";
 import Navbar from "@/components/Navbar";
 import Pagination from "@/components/Pagination";
@@ -15,7 +16,7 @@ type ModsClient = {
         total: number,
         totalPages: number
     },
-    query: string
+    query: string,
 }
 
 export default function ModsClient({ data, pagination, query }: ModsClient) {
@@ -34,11 +35,18 @@ export default function ModsClient({ data, pagination, query }: ModsClient) {
         router.push(`/mods?${params.toString()}`)
     }
 
+    function handleLimitChange(limit: number) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set('limit', String(limit))
+        router.push(`/mods?${params.toString()}`)
+    } 
+
     return (
         <main>
             <Navbar />
             <section className="container mx-auto p-0">
                 <SearchBar query={query} onQueryChange={handleQueryChange} />
+                <FiltersBar limit={pagination.limit} onLimitChange={handleLimitChange} />
                 {data.map((mod: Mod) => (
                     <ModsListElement data={mod} key={mod.repo} />
                 ))}
