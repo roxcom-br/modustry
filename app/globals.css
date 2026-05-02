@@ -32,3 +32,9 @@
         --scheme-color-secondary: var(--scheme-color-dark-secondary)
     }
 }
+
+@layer components {
+    .unreset * {
+        all: revert;
+    }
+}
