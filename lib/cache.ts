@@ -4,7 +4,7 @@ import { unstable_cache } from "next/cache";
 
 export const getCache = unstable_cache(
     async () => {
-        const res = await fetch("https://raw.githubusercontent.com/Anuken/MindustryMods/master/mods.json")
+        const res = await fetch("https://raw.githubusercontent.com/Roxxedo/MindustryMods/master/mods.json")
 
         if (!res.ok) {
             throw new Error(`Erro ao buscar data: ${res.status}`)
@@ -12,18 +12,24 @@ export const getCache = unstable_cache(
 
         let mods = await res.json()
 
-        mods = mods.map(({ internalName, ...rest }: any) => ({
-            id: internalName,
-            name: rest.name,
-            repo: rest.repo,
-            author: rest.author,
-            minGameVersion: rest.minGameVersion,
-            lastUpdated: rest.lastUpdated,
-            stars: rest.stars,
-            hasScripts: rest.hasScripts,
-            hasJava: rest.hasJava,
-            description: rest.description
-        }))
+        mods = await Promise.all(
+            mods.map(async ({ internalName, ...rest }: any) => {
+                return {
+                    id: internalName,
+                    name: rest.name,
+                    repo: rest.repo,
+                    author: rest.author,
+                    minGameVersion: rest.minGameVersion,
+                    stars: rest.stars,
+                    hasScripts: rest.hasScripts,
+                    hasJava: rest.hasJava,
+                    description: rest.description,
+                    body: rest.body,
+                    createdAt: rest.createdAt,
+                    updatedAt: rest.lastUpdated,
+                }   
+            })
+        );
 
         return mods as Mod[]
     },
