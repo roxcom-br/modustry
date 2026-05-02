@@ -5,9 +5,9 @@ import Image from "@/components/utils/Image"
 export default function ListElement({ data }: { data: Mod }) {
     return (
         <Link
-            href={'/mod/' + data.repo.split('/')[1]}
+            href={'/mod/' + data.id}
             aria-current="true"
-            key={'mod-' + data.repo.split('/')[1]}
+            key={'mod-' + data.id}
             className="flex items-center gap-3 mb-4 rounded-xl transition bg-(--scheme-color-secondary)"
         >
             <Image
