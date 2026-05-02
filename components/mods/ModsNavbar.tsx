@@ -15,7 +15,7 @@ export default function ModsNavbar() {
 
     return (
         <>
-            <div className="container mx-auto p-0">
+            <div className="container mx-auto p-0 bg-(--scheme-color-secondary) rounded-xl">
                 <header className="mt-2 mb-2 flex items-center justify-center py-2">
                     <ul className="flex w-full justify-center">
                         {value.map((item) => (
