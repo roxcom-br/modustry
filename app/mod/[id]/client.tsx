@@ -19,7 +19,9 @@ export default function ModClient({ data, body }: ModClient) {
                 <ModSidebarInfo data={data} />
                 <div className="w-full">
                     <ModsNavbar />
-                    <Markdown content={body} />
+                    <div className="bg-(--scheme-color-secondary) p-6 rounded-xl">
+                        <Markdown content={body} />
+                    </div>
                 </div>
             </section>
         </main>
