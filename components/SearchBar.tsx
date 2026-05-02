@@ -11,7 +11,7 @@ export default function SearchBar({ query, onQueryChange }: SearchBar) {
     const [input, setInput] = useState(query ?? '')
 
     useEffect(() => {
-        setInput(query)
+        setInput(query ?? '')
     }, [query])
 
     useEffect(() => {
