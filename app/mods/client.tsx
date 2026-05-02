@@ -17,9 +17,10 @@ type ModsClient = {
         totalPages: number
     },
     query: string,
+    sort: string
 }
 
-export default function ModsClient({ data, pagination, query }: ModsClient) {
+export default function ModsClient({ data, pagination, query, sort }: ModsClient) {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -41,12 +42,18 @@ export default function ModsClient({ data, pagination, query }: ModsClient) {
         router.push(`/mods?${params.toString()}`)
     } 
 
+    function handleSortChange(sort: string) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set('sort', sort)
+        router.push(`/mods?${params.toString()}`)
+    }
+
     return (
         <main>
             <Navbar />
             <section className="container mx-auto p-0">
                 <SearchBar query={query} onQueryChange={handleQueryChange} />
-                <FiltersBar limit={pagination.limit} onLimitChange={handleLimitChange} />
+                <FiltersBar sort={sort} onSortChange={handleSortChange} limit={pagination.limit} onLimitChange={handleLimitChange} />
                 {data.map((mod: Mod) => (
                     <ModsListElement data={mod} key={mod.repo} />
                 ))}

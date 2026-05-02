@@ -10,18 +10,19 @@ async function getData(params: URLSearchParams) {
     return await res.json()
 }
 
-export default async function Mods({ searchParams }: { searchParams: Promise<{ page: string, q: string, limit: string }> }) {
-    const { page, q, limit } = await searchParams
+export default async function Mods({ searchParams }: { searchParams: Promise<{ page: string, q: string, limit: string, sort: string }> }) {
+    const { page, q, limit, sort } = await searchParams
 
     const params = new URLSearchParams()
 
     if (page) params.set('page', page)
     if (q) params.set('q', q)
     if (limit) params.set('limit', limit)
+    if (sort) params.set('sort', sort)
 
     const data = await getData(params);
 
     return (
-        <ModsClient data={data['data']} pagination={data['pagination']} query={q} />
+        <ModsClient data={data['data']} pagination={data['pagination']} query={q} sort={sort} />
     )
 }

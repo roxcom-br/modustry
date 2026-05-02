@@ -7,6 +7,7 @@ export async function GET(request: Request) {
 
     const page = parsePositiveInt(searchParams.get('page'), 1)
     const limit = parsePositiveInt(searchParams.get('limit'), 20)
+    const sort = searchParams.get('sort') ?? "relevance"
 
     let mods = await getCache()
 
@@ -18,6 +19,9 @@ export async function GET(request: Request) {
         x.repo.toLowerCase().includes(q) ||
         x.description.toLowerCase().includes(q)
     )
+
+    if (sort == "date published") mods.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+    if (sort == "date updated") mods.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
 
     const start = (page - 1) * limit
     const end = start + limit
