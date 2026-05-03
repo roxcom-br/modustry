@@ -27,7 +27,8 @@ async function processMarkdown(value: string) {
         .use(html)
         .process(value)).toString()
 }
-export default async function Mod({ params }: { params: Promise<{ id: string }> }) {
+
+export default async function ModChangelog({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
 
     const data = await getData(id)

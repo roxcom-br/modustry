@@ -9,7 +9,7 @@ export async function GET(
 
     const mod = (await getCache()).find(x => x.id == id)
 
-    const res = await fetch(`https://api.github.com/repos/${mod!!.repo}/releases`)
+    const res = await fetch(`https://api.github.com/repos/${mod!!.repo}/releases?per_page=100`)
     
     const json = await res.json()
 
@@ -20,8 +20,6 @@ export async function GET(
             body: value.body,
         }
     ))
-
-    console.log(list)
 
     return NextResponse.json(list)
 }
