@@ -10,17 +10,19 @@ async function getData(params: URLSearchParams) {
     return await res.json()
 }
 
-export default async function Textures({ searchParams }: { searchParams: Promise<{ page: string, q: string }> }) {
-    const { page, q } = await searchParams
+export default async function Textures({ searchParams }: { searchParams: Promise<{ page: string, q: string, sort: string, limit: string }> }) {
+    const { page, q, sort, limit } = await searchParams
 
     const params = new URLSearchParams()
 
     if (page) params.set('page', String(page))
     if (q) params.set('q', q)
+    if (sort) params.set('sort', sort)
+    if (limit) params.set('limit', limit)
 
     const data = await getData(params)
 
     return (
-        <TexturesClient data={data['data']} pagination={data['pagination']} query={q} />
+        <TexturesClient data={data['data']} pagination={data['pagination']} query={q} sort={sort} />
     )
 }

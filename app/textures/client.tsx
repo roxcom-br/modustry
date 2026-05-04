@@ -1,5 +1,6 @@
 'use client'
 
+import FiltersBar from "@/components/FiltersBar"
 import ModsListElement from "@/components/mods/ModsListElement"
 import Navbar from "@/components/Navbar"
 import Pagination from "@/components/Pagination"
@@ -15,10 +16,11 @@ type TexturesClient = {
         total: number,
         totalPages: number
     },
-    query: string
+    query: string,
+    sort: string
 }
 
-export default function TexturesClient({ data, pagination, query }: TexturesClient) {
+export default function TexturesClient({ data, pagination, query, sort }: TexturesClient) {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -34,11 +36,24 @@ export default function TexturesClient({ data, pagination, query }: TexturesClie
         router.push(`/textures?${params.toString()}`)
     }
 
+    function handleSortChange(sort: string) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set('sort', String(sort))
+        router.push(`/textures?${params.toString()}`)
+    }
+
+    function handleLimitChange(limit: number) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set('limit', String(limit))
+        router.push(`/textures?${params.toString()}`)
+    }
+
     return (
         <main>
             <Navbar />
             <section className="container mx-auto p-0">
                 <SearchBar query={query} onQueryChange={handleQueryChange} />
+                <FiltersBar sort={sort} onSortChange={handleSortChange} limit={pagination.limit} onLimitChange={handleLimitChange} />
                 {data.map((mod: Mod) => (
                     <ModsListElement data={mod} key={mod.repo} />
                 ))}
