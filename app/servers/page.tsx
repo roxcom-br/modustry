@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import ServersClient from "./client";
+
+export const metadata: Metadata = {
+    title: "Modustry | Servers"
+};
 
 async function getData(params: URLSearchParams) {
     const res = await fetch(`http://localhost:3001/api/v1/servers?${params.toString()}`, {

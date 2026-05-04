@@ -1,4 +1,9 @@
+import { Metadata } from "next";
 import ModsClient from "./client";
+
+export const metadata: Metadata = {
+    title: "Modustry | Mods"
+};
 
 async function getData(params: URLSearchParams) {
     const res = await fetch(`http://localhost:3001/api/v1/mods?${params.toString()}`, {
