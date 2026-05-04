@@ -1,5 +1,6 @@
 import { Mod } from "@/types/mod";
 import { Server } from "@/types/server";
+import { Version } from "@/types/version";
 import { unstable_cache } from "next/cache";
 
 export const getCache = unstable_cache(
@@ -17,6 +18,24 @@ export const getCache = unstable_cache(
     ['cache'],
     {
         revalidate: 300
+    }
+)
+
+export const getVersionsCache = unstable_cache(
+    async () => {
+        const res = await fetch("https://raw.githubusercontent.com/Roxxedo/MindustryMods/master/data/versions.json")
+
+        if (!res.ok) {
+            throw new Error(`Erro ao buscar data: ${res.status}`)
+        }
+
+        let versions = await res.json()
+
+        return versions as Version[]
+    },
+    ['versions-cache'],
+    {
+        revalidate: 600
     }
 )
 
