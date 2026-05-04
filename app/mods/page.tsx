@@ -10,8 +10,18 @@ async function getData(params: URLSearchParams) {
     return await res.json()
 }
 
-export default async function Mods({ searchParams }: { searchParams: Promise<{ page: string, q: string, limit: string, sort: string }> }) {
-    const { page, q, limit, sort } = await searchParams
+async function getVersions() {
+    const res = await fetch(`http://localhost:3001/api/v1/versions?limit=100`, {
+        next: { revalidate: 300 }
+    })
+
+    if (!res.ok) throw new Error('Erro')
+
+    return await res.json()
+}
+
+export default async function Mods({ searchParams }: { searchParams: Promise<{ page: string, q: string, limit: string, sort: string, loader: string, version: string }> }) {
+    const { page, q, limit, sort, loader, version } = await searchParams
 
     const params = new URLSearchParams()
 
@@ -19,10 +29,13 @@ export default async function Mods({ searchParams }: { searchParams: Promise<{ p
     if (q) params.set('q', q)
     if (limit) params.set('limit', limit)
     if (sort) params.set('sort', sort)
+    if (loader) params.set('loader', loader)
+    if (version) params.set('version', version)
 
     const data = await getData(params);
+    const versions = await getVersions()
 
     return (
-        <ModsClient data={data['data']} pagination={data['pagination']} query={q} sort={sort} />
+        <ModsClient data={data['data']} pagination={data['pagination']} query={q} sort={sort} loader={loader} version={version} versions={versions.data} />
     )
 }
