@@ -3,12 +3,13 @@ export type Mod = {
     name: string
     repo: string
     author: string
-    minGameVersion: string
+    min_game_version: string
     stars: number
-    hasScripts: boolean
-    hasJava: boolean
+    has_scripts: boolean
+    has_java: boolean
     description: string
     body: string
-    createdAt: string
-    updatedAt: string
+    downloads: number
+    created_at: string
+    updated_at: string
 }

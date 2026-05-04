@@ -1,6 +1,7 @@
 import { Mod } from "@/types/mod"
 import Image from "../utils/Image"
 import moment from "moment"
+import { formatNumber } from "@/lib/utils"
 
 type ModSidebarInfo = {
     data: Mod
@@ -47,7 +48,7 @@ export default function ModSidebarInfo({ data }: ModSidebarInfo) {
             <div className="flex flex-col gap-1">
                 <span className="inline-flex items-center gap-1">
                     <i className="fa-solid fa-download" />
-                    <span className="font-bold">{}</span>
+                    <span className="font-bold">{formatNumber(data.downloads)}</span>
                     Downloads
                 </span>
                 <span className="inline-flex items-center gap-1">
@@ -58,11 +59,11 @@ export default function ModSidebarInfo({ data }: ModSidebarInfo) {
                 <div className="dates flex flex-col gap-1">
                     <span className="inline-flex items-center gap-1">
                         <i className="fa-solid fa-calendar" />
-                        Created <span className="font-bold">{moment(data.createdAt).fromNow()}</span>
+                        Created <span className="font-bold">{moment(data.created_at).fromNow()}</span>
                     </span>
                     <span className="inline-flex items-center gap-1">
                         <i className="fa-solid fa-rotate" />
-                        Updated <span className="font-bold">{moment(data.updatedAt).fromNow()}</span>
+                        Updated <span className="font-bold">{moment(data.updated_at).fromNow()}</span>
                     </span>
                 </div>
                 <div className="buttons mt-3 flex gap-2">

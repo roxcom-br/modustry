@@ -7,7 +7,6 @@ export default function ListElement({ data }: { data: Mod }) {
         <Link
             href={'/mod/' + data.id}
             aria-current="true"
-            key={'mod-' + data.id}
             className="flex items-center gap-3 mb-4 rounded-xl transition bg-(--scheme-color-secondary)"
         >
             <Image
@@ -28,7 +27,7 @@ export default function ListElement({ data }: { data: Mod }) {
                     <small className="text-sm text-zinc-500"> by {data.repo.split('/')[0]}</small>
 
                     <div className="mb-1 text-sm text-zinc-500">
-                        <span>Stars: {data.stars} | Game Version: {data.minGameVersion}</span>
+                        <span>Stars: {data.stars} | Game Version: {data.min_game_version}</span>
                     </div>
 
                     <p

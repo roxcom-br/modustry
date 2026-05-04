@@ -3,6 +3,7 @@
 import ModSidebarInfo from "@/components/mods/ModSidebarInfo"
 import ModsNavbar from "@/components/mods/ModsNavbar"
 import Navbar from "@/components/Navbar"
+import { formatNumber } from "@/lib/utils"
 import { Mod } from "@/types/mod"
 import moment from "moment"
 
@@ -15,13 +16,6 @@ type ModVersionsClient = {
         download_url: string,
         created_at: string
     }[]
-}
-
-function formatNumber(num: number) {
-    return new Intl.NumberFormat('en-US', {
-        notation: "compact",
-        compactDisplay: "short"
-    }).format(num).toLowerCase()
 }
 
 export default function ModVersionsClient({ data, versions }: ModVersionsClient) {
@@ -55,7 +49,7 @@ export default function ModVersionsClient({ data, versions }: ModVersionsClient)
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div>  
             </section>
         </main>
     )
