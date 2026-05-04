@@ -8,6 +8,8 @@ export async function GET(request: Request) {
     const page = parsePositiveInt(searchParams.get('page'), 1)
     const limit = parsePositiveInt(searchParams.get('limit'), 20)
     const sort = searchParams.get('sort') ?? "relevance"
+    const loader = searchParams.get('loader') ?? "all"
+    const version = searchParams.get('version') ?? ""
 
     let mods = await getCache()
 
@@ -20,8 +22,14 @@ export async function GET(request: Request) {
         x.description.toLowerCase().includes(q)
     )
 
-    if (sort == "date published") mods.sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
-    if (sort == "date updated") mods.sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt))
+    if (version) mods = mods.filter(x => parseFloat(x.min_game_version) >= parseFloat(version.replace('v', '')))
+    
+    if (loader == "java") mods = mods.filter(x => x.has_java)
+    if (loader == "script") mods = mods.filter(x => x.has_scripts)
+
+    if (sort == "downloads") mods.sort((a, b) => b.downloads - a.downloads)
+    if (sort == "date published") mods.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
+    if (sort == "date updated") mods.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at))
 
     const start = (page - 1) * limit
     const end = start + limit
