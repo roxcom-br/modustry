@@ -8,10 +8,11 @@ type Props = {
     alt: string,
     className?: string,
     width: number,
-    height: number
+    height: number,
+    blurPlaceholder?: string
 }
 
-export default function Image({ src, alt, className, width, height }: Props) {
+export default function Image({ src, alt, className, width, height, blurPlaceholder }: Props) {
     const [index, setIndex] = useState(0)
 
     function handleError() {
@@ -27,6 +28,8 @@ export default function Image({ src, alt, className, width, height }: Props) {
             className={className}
             onError={handleError}
             unoptimized
+            placeholder={blurPlaceholder ? "blur" : "empty"}
+            blurDataURL={blurPlaceholder}
         />
     )
 }
