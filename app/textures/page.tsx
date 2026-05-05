@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import TexturesClient from "./client";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
     title: "Modustry | Textures"
@@ -10,6 +11,7 @@ async function getData(params: URLSearchParams) {
         next: { revalidate: 300 }
     })
 
+    if (res.status == 404) notFound()
     if (!res.ok) throw new Error('Erro')
     
     return await res.json()

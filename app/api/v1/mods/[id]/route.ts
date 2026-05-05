@@ -7,7 +7,16 @@ export async function GET(
 ) {
     const { id } = await params
 
-    const mods = await getCache()
+    const mod = (await getCache()).find(x => x.id == id)
 
-    return NextResponse.json(mods.find(x => x.id == id))
+    if (!mod) {
+        return NextResponse.json({
+            error: {
+                code: "NOT_FOUND",
+                message: "The requested resource cannot be found"
+            }
+        }, { status: 404 })
+    }
+
+    return NextResponse.json(mod)
 }

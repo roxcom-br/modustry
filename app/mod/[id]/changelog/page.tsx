@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import ModChangelogClient from "./client";
 import { remark } from "remark"
 import html from "remark-html"
@@ -7,6 +8,7 @@ async function getData(id: string) {
         next: { revalidate: 300 }
     })
 
+    if (res.status == 404) notFound()
     if (!res.ok) throw new Error('Erro')
 
     return await res.json()

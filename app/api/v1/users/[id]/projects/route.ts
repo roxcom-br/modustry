@@ -13,6 +13,16 @@ export async function GET(
     const limit = parsePositiveInt(searchParams.get('limit'), 20);
 
     let mods = await getCache()
+
+    if (!mods.map(x => x.repo.split('/')[0]).includes(id)) {
+        return NextResponse.json({
+            error: {
+                code: "NOT_FOUND",
+                message: "The requested resource cannot be found"
+            }
+        }, { status: 404 })
+    }
+
     mods = mods.filter(x => x.repo.split("/")[0] == id)
 
     const start = (page - 1) * limit

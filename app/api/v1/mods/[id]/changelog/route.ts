@@ -9,8 +9,26 @@ export async function GET(
 
     const mod = (await getCache()).find(x => x.id == id)
 
+    if (!mod) {
+        return NextResponse.json({
+            error: {
+                code: "NOT_FOUND",
+                message: "The requested resource cannot be found"
+            }
+        }, { status: 404 })
+    }
+
     const res = await fetch(`https://api.github.com/repos/${mod!!.repo}/releases?per_page=100`)
     
+    if (!res.ok) {
+        return NextResponse.json({
+            error: {
+                code: "INTERNAL_ERROR",
+                message: "Internal server error"
+            }
+        }, { status: 500 })
+    }
+
     const json = await res.json()
 
     let list = json.map((value: any) => (
