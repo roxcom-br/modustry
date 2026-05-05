@@ -3,7 +3,8 @@ import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 export const metadata: Metadata = {
-    title: "Modustry"
+    title: "Modustry",
+    icons: "/icon.jpg"
 };
 
 export default function RootLayout({
