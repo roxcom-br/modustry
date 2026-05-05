@@ -69,8 +69,8 @@ export default function ModsClient({ data, pagination, query, sort, loader, vers
     return (
         <main>
             <Navbar />
-            <section className="container mx-auto p-0">
-                <div className="flex gap-4">
+            <section className="container mx-auto px-4 md:p-0">
+                <div className="flex flex-col md:flex-row gap-4">
                     <ModsSidebarFilters loader={loader} setLoader={handleLoaderChange} version={version} setVersion={handleVersionChange} versions={versions} />
                     <div>
                         <SearchBar query={query} onQueryChange={handleQueryChange} />

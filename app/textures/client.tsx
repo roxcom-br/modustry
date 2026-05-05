@@ -52,7 +52,7 @@ export default function TexturesClient({ data, pagination, query, sort }: Textur
     return (
         <main>
             <Navbar />
-            <section className="container mx-auto p-0">
+            <section className="container mx-auto px-4 md:p-0">
                 <SearchBar query={query} onQueryChange={handleQueryChange} />
                 <FiltersBar sort={sort} onSortChange={handleSortChange} limit={pagination.limit} onLimitChange={handleLimitChange} />
                 {data.map((mod: Mod) => (

@@ -38,7 +38,7 @@ export default function ServersClient({ data, pagination, query }: ServersClient
     return (    
         <main>
             <Navbar />
-            <section className="container mx-auto p-0">
+            <section className="container mx-auto px-4 md:p-0">
                 <SearchBar query={query} onQueryChange={handleQueryChange} />
                 {data.map((server: Server) => (
                     <ServersListElement data={server} key={`${server.name}-${server.version}-${server.address.length}`} />

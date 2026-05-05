@@ -15,7 +15,7 @@ export default function Navbar() {
 
     return (
         <nav className="container mx-auto">
-            <header className="mt-2 mb-4 flex items-center justify-center py-2 md:justify-between">
+            <header className="mt-2 mb-4 flex items-center justify-center py-2 md:justify-between px-4 md:px-0">
                 <div className="md:w-1/4">
                     <h4 className="m-0 inline-flex font-bold text-xl">
                         <a href="/">

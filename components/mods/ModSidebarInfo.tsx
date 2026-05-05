@@ -9,7 +9,7 @@ type ModSidebarInfo = {
 
 export default function ModSidebarInfo({ data }: ModSidebarInfo) {
     return (
-        <div className="flex flex-col bg-(--scheme-color-secondary) p-6 rounded-xl max-w-[320px] self-start">
+        <div className="flex flex-col bg-(--scheme-color-secondary) p-6 rounded-xl md:max-w-[320px] self-start">
             <Image
                 src={[
                     'https://raw.githubusercontent.com/' + data.repo + '/master/icon.png',

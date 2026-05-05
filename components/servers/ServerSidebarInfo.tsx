@@ -7,7 +7,7 @@ type ServerSidebarInfo = {
 
 export default function ServerSidebarInfo({ data }: ServerSidebarInfo) {
     return (
-        <div className="flex flex-col bg-(--scheme-color-secondary) p-6 rounded-xl max-w-[320px]">
+        <div className="flex flex-col bg-(--scheme-color-secondary) p-6 rounded-xl md:max-w-[320px]">
             <Image
                 src={[
                     '/icon.jpg',

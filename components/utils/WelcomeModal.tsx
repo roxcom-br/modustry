@@ -21,7 +21,7 @@ export default function WelcomeModal() {
     if (!open) return null
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 md:px-0">
             <div className="max-w-lg rounded-2xl bg-(--background) p-6 shadow-xl">
                 <h2 className="text-xl font-bold">
                     Modustry v2 is here!
