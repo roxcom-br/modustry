@@ -1,5 +1,6 @@
 'use client'
 
+import Footer from "@/components/Footer"
 import ModSidebarInfo from "@/components/mods/ModSidebarInfo"
 import ModsNavbar from "@/components/mods/ModsNavbar"
 import Navbar from "@/components/Navbar"
@@ -51,6 +52,7 @@ export default function ModVersionsClient({ data, versions }: ModVersionsClient)
                     </div>
                 </div>  
             </section>
+            <Footer />
         </main>
     )
 }

@@ -1,5 +1,6 @@
 'use client'
 
+import Footer from "@/components/Footer"
 import Navbar from "@/components/Navbar"
 import Pagination from "@/components/Pagination"
 import SearchBar from "@/components/SearchBar"
@@ -44,6 +45,7 @@ export default function ServersClient({ data, pagination, query }: ServersClient
                 ))}
                 <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
             </section>
+            <Footer />
         </main>
     )
 }

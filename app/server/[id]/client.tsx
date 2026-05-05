@@ -1,5 +1,6 @@
 'use client'
 
+import Footer from "@/components/Footer"
 import Navbar from "@/components/Navbar"
 import ServerSidebarInfo from "@/components/servers/ServerSidebarInfo"
 import { Server } from "@/types/server"
@@ -15,6 +16,7 @@ export default function ServerClient({ data }: ServerClient) {
             <section className="container mx-auto p-0">
                 <ServerSidebarInfo data={data} />
             </section>
+            <Footer />
         </main>
     )
 }

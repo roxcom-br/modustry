@@ -1,6 +1,7 @@
 'use client'
 
 import FiltersBar from "@/components/FiltersBar";
+import Footer from "@/components/Footer";
 import ModsListElement from "@/components/mods/ModsListElement";
 import ModsSidebarFilters from "@/components/mods/ModsSidebarFilters";
 import Navbar from "@/components/Navbar";
@@ -81,6 +82,7 @@ export default function ModsClient({ data, pagination, query, sort, loader, vers
                 </div>
                 <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
             </section>
+            <Footer />
         </main>
     )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import FiltersBar from "@/components/FiltersBar"
+import Footer from "@/components/Footer"
 import ModsListElement from "@/components/mods/ModsListElement"
 import Navbar from "@/components/Navbar"
 import Pagination from "@/components/Pagination"
@@ -59,6 +60,7 @@ export default function TexturesClient({ data, pagination, query, sort }: Textur
                 ))}
                 <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
             </section>
+            <Footer />
         </main>
     )
 }

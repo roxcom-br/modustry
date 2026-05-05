@@ -1,5 +1,6 @@
 'use client'
 
+import Footer from "@/components/Footer"
 import Markdown from "@/components/Markdown"
 import ModSidebarInfo from "@/components/mods/ModSidebarInfo"
 import ModsNavbar from "@/components/mods/ModsNavbar"
@@ -33,6 +34,7 @@ export default function ModChangelogClient({ data, changelog }: ModChangelogClie
                     </div>
                 </div>
             </section>
+            <Footer />
         </main>
     )
 }
