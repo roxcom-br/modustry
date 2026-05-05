@@ -23,7 +23,7 @@ export default function ServerSidebarInfo({ data }: ServerSidebarInfo) {
             <hr className="my-4 border-zinc-200" />
             <ul className="flex flex-col gap-1 list-disc ps-4">
                 {data.address.map((item) => (
-                    <li>{item}</li>
+                    <li key={item}>{item}</li>
                 ))}
             </ul>
         </div>

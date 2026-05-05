@@ -20,7 +20,7 @@ export default function ModChangelogClient({ data, changelog }: ModChangelogClie
     return (
         <main>
             <Navbar />
-            <section className="container mx-auto p-0 flex gap-4">
+            <section className="container mx-auto p-0 flex gap-4 min-h-[90vh]">
                 <ModSidebarInfo data={data} />
                 <div className="w-full">
                     <ModsNavbar />

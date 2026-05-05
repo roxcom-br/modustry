@@ -13,7 +13,7 @@ export default function ServerClient({ data }: ServerClient) {
     return (
         <main>
             <Navbar />
-            <section className="container mx-auto p-0">
+            <section className="container mx-auto p-0 min-h-[90vh]">
                 <ServerSidebarInfo data={data} />
             </section>
             <Footer />
