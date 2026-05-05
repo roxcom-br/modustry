@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 async function getData(params: URLSearchParams) {
-    const res = await fetch(`http://localhost:3001/api/v1/mods?${params.toString()}`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/mods?${params.toString()}`, {
         next: { revalidate: 300 }
     })
 
@@ -16,7 +16,7 @@ async function getData(params: URLSearchParams) {
 }
 
 async function getVersions() {
-    const res = await fetch(`http://localhost:3001/api/v1/versions?limit=100`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/versions?limit=100`, {
         next: { revalidate: 300 }
     })
 

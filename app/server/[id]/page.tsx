@@ -1,7 +1,7 @@
 import ServerClient from "./client";
 
 async function getData(id: string) {
-    const res = await fetch(`http://localhost:3001/api/v1/servers/${id}`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/servers/${id}`, {
         next: { revalidate: 300 }
     })
 

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 async function getData(params: URLSearchParams) {
-    const res = await fetch(`http://localhost:3001/api/v1/servers?${params.toString()}`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/servers?${params.toString()}`, {
         next: { revalidate: 300 }
     })
 

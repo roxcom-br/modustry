@@ -1,7 +1,7 @@
 import ModVersionsClient from "./client";
 
 async function getData(id: string) {
-    const res = await fetch(`http://localhost:3001/api/v1/mods/${id}`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/mods/${id}`, {
         next: { revalidate: 300 }
     })
 
@@ -11,7 +11,7 @@ async function getData(id: string) {
 }
 
 async function getVersionsData(id: string) {
-    const res = await fetch(`http://localhost:3001/api/v1/mods/${id}/versions`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/mods/${id}/versions`, {
         next: { revalidate: 300 }
     })
 

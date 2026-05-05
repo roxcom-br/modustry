@@ -3,7 +3,7 @@ import { remark } from "remark"
 import html from "remark-html"
 
 async function getData(id: string) {
-    const res = await fetch(`http://localhost:3001/api/v1/mods/${id}`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/mods/${id}`, {
         next: { revalidate: 300 }
     })
 
@@ -13,7 +13,7 @@ async function getData(id: string) {
 }
 
 async function getChangelogData(id: string) {
-    const res = await fetch(`http://localhost:3001/api/v1/mods/${id}/changelog`, {
+    const res = await fetch(`${process.env.API_URL}/api/v1/mods/${id}/changelog`, {
         next: { revalidate: 300 }
     })
 
