@@ -2,6 +2,7 @@ import { Mod } from "@/types/mod"
 import Image from "../utils/Image"
 import moment from "moment"
 import { formatNumber } from "@/lib/utils"
+import { MindustryText } from "../utils/MindustryText"
 
 type ModSidebarInfo = {
     data: Mod
@@ -23,7 +24,7 @@ export default function ModSidebarInfo({ data }: ModSidebarInfo) {
             />
             <div>
                 <h2 className="text-2xl font-semibold my-1">{data.name}</h2>
-                <span>{data.description}</span>
+                <MindustryText className="whitespace-pre-line" text={data.description} />
                 <div className="flex items-center gap-2 mt-2">
                     <a
                         className="flex items-center gap-1"

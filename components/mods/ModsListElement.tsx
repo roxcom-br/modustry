@@ -1,6 +1,7 @@
 import { Mod } from "@/types/mod";
 import Link from "next/link";
 import Image from "@/components/utils/Image"
+import { MindustryText } from "../utils/MindustryText";
 
 export default function ListElement({ data }: { data: Mod }) {
     return (
@@ -39,7 +40,7 @@ export default function ListElement({ data }: { data: Mod }) {
                             WebkitBoxOrient: 'vertical',
                         }}
                     >
-                        {data.description}
+                        <MindustryText text={data.description} />
                     </p>
                 </div>
             </div>
