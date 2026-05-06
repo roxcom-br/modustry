@@ -19,7 +19,7 @@ export default function SearchBar({ query, onQueryChange }: SearchBar) {
             if (input !== query) {
                 onQueryChange(input)
             }
-        }, 300)
+        }, 500)
 
         return () => clearTimeout(timeout)
     }, [input, query, onQueryChange])

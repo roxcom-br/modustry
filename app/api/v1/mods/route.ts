@@ -15,12 +15,22 @@ export async function GET(request: Request) {
 
     const q = searchParams.get('q')?.toLowerCase() ?? ""
 
-    mods = mods.filter(x =>
-        x.name.toLowerCase().includes(q) ||
-        x.author.toLowerCase().includes(q) ||
-        x.repo.toLowerCase().includes(q) ||
-        x.description.toLowerCase().includes(q)
-    )
+    mods = mods.map((mod) => {
+        let score = 0
+
+        if (mod.name.toLowerCase().includes(q)) score += 100;
+        if (mod.author.toLowerCase().includes(q)) score += 50;
+        if (mod.repo.toLowerCase().includes(q)) score += 25;
+        if (mod.description.toLowerCase().includes(q)) score += 10;
+
+        return {
+            ...mod,
+            score
+        }
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .map(({ score, ...mod }) => mod)
 
     if (version) mods = mods.filter(x => parseFloat(x.min_game_version) >= parseFloat(version.replace('v', '')))
     
