@@ -12,8 +12,8 @@ async function getData(id: string) {
     return await res.json()
 }
 
-async function getChangelogData(id: string) {
-    const res = await fetch(`${process.env.API_URL}/api/v1/mods/${id}/changelog`, {
+async function getChangelogData(id: string, params: URLSearchParams) {
+    const res = await fetch(`${process.env.API_URL}/api/v1/mods/${id}/changelog?${params.toString()}`, {
         next: { revalidate: 300 }
     })
 
@@ -22,15 +22,21 @@ async function getChangelogData(id: string) {
     return await res.json()
 }
 
-export default async function ModChangelog({ params }: { params: Promise<{ id: string }> }) {
+export default async function ModChangelog({ params, searchParams }: { params: Promise<{ id: string }>, searchParams: Promise<{ page: string, limit: string }> }) {
     const { id } = await params
+    const { page, limit } = await searchParams
+
+    const usp = new URLSearchParams('')
+
+    if (page) usp.set('page', page)
+    if (limit) usp.set('limit', limit)
 
     const data = await getData(id)
-    let changelog = await getChangelogData(id)
+    const changelogs = await getChangelogData(id, usp)
 
     return (
         <>
-            <ModChangelogClient data={data} changelog={changelog} />
+            <ModChangelogClient data={data} changelogs={changelogs.data} pagination={changelogs.pagination} />
         </>
     )
 }

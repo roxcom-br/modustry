@@ -4,19 +4,34 @@ import Footer from "@/components/Footer"
 import ModSidebarInfo from "@/components/mods/ModSidebarInfo"
 import ModsNavbar from "@/components/mods/ModsNavbar"
 import Navbar from "@/components/Navbar"
+import Pagination from "@/components/Pagination"
 import Markdown from "@/components/utils/Markdown"
 import { Mod } from "@/types/mod"
+import { ModChangelog } from "@/types/mod-changelog"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 
 type ModChangelogClient = {
     data: Mod,
-    changelog: {
-        name: string,
-        version: string,
-        body: string
-    }[]
+    changelogs: ModChangelog[],
+    pagination: {
+        page: number,
+        limit: number,
+        total: number,
+        totalPages: number
+    }
 }
 
-export default function ModChangelogClient({ data, changelog }: ModChangelogClient) {
+export default function ModChangelogClient({ data, changelogs, pagination }: ModChangelogClient) {
+    const router = useRouter()
+    const params = useParams()
+    const searchParams = useSearchParams()
+
+    function handlePageChange(page: number) {
+        const usp = new URLSearchParams(searchParams.toString())
+        usp.set('page', String(page))
+        router.push(`/mod/${params['id']}/changelog?${usp.toString()}`)
+    }
+
     return (
         <main>
             <Navbar />
@@ -25,12 +40,13 @@ export default function ModChangelogClient({ data, changelog }: ModChangelogClie
                 <div className="w-full">
                     <ModsNavbar />
                     <div className="flex flex-col gap-2">
-                        {changelog.map((value) => (
+                        {changelogs.map((value) => (
                             <div key={value.version} className="bg-(--scheme-color-secondary) p-6 rounded-xl">
                                 <h2 className="text-3xl font-semibold mb-4">{value.name}</h2>
                                 <Markdown key={value.name} body={value.body} repo={data.repo} branch={data.branch} />
                             </div>
                         ))}
+                        <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange}/>
                     </div>
                 </div>
             </section>
