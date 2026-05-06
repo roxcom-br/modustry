@@ -2,6 +2,7 @@ export type Mod = {
     id: string
     name: string
     repo: string
+    branch: string
     author: string
     min_game_version: string
     stars: number

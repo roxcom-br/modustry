@@ -1,10 +1,10 @@
 'use client'
 
 import Footer from "@/components/Footer"
-import Markdown from "@/components/Markdown"
 import ModSidebarInfo from "@/components/mods/ModSidebarInfo"
 import ModsNavbar from "@/components/mods/ModsNavbar"
 import Navbar from "@/components/Navbar"
+import Markdown from "@/components/utils/Markdown"
 import { Mod } from "@/types/mod"
 
 type ModChangelogClient = {
@@ -28,7 +28,7 @@ export default function ModChangelogClient({ data, changelog }: ModChangelogClie
                         {changelog.map((value) => (
                             <div key={value.version} className="bg-(--scheme-color-secondary) p-6 rounded-xl">
                                 <h2 className="text-3xl font-semibold mb-4">{value.name}</h2>
-                                <Markdown key={value.name} content={value.body} />
+                                <Markdown key={value.name} body={value.body} repo={data.repo} branch={data.branch} />
                             </div>
                         ))}
                     </div>
