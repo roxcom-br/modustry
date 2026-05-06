@@ -1,11 +1,16 @@
 import { getCache } from "@/lib/cache";
+import { parsePositiveInt } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
-    _req: NextRequest,
+    request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
     const { id } = await params
+    const { searchParams } = new URL(request.url)
+
+    const page = parsePositiveInt(searchParams.get('page'), 1)
+    const limit = parsePositiveInt(searchParams.get('limit'), 20)
 
     const mod = (await getCache()).find(x => x.id == id)
 
@@ -41,5 +46,16 @@ export async function GET(
         }
     ))
 
-    return NextResponse.json(list)
+    const start = (page - 1) * limit
+    const end = start + limit
+
+    return NextResponse.json({
+        data: list.slice(start, end),
+        pagination: {
+            page,
+            limit,
+            total: list.length,
+            totalPages: Math.ceil(list.length / limit)
+        }
+    })
 }
