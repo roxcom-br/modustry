@@ -23,28 +23,39 @@ export async function GET(
         }, { status: 404 })
     }
 
-    const res = await fetch(`https://api.github.com/repos/${mod!!.repo}/releases?per_page=100`)
-    
-    if (!res.ok) {
-        return NextResponse.json({
-            error: {
-                code: "INTERNAL_ERROR",
-                message: "Internal server error"
-            }
-        }, { status: 500 })
-    }
+    let list;
+    if (mod.has_java) {
+        const res = await fetch(`https://api.github.com/repos/${mod!!.repo}/releases?per_page=100`)
 
-    const json = await res.json()
-
-    let list = json.map((value: any) => (
-        {
-            name: value.name,
-            version: value.tag_name,
-            download_count: value.assets[0].download_count,
-            download_url: value.assets[0].browser_download_url,
-            created_at: value.assets[0].created_at
+        if (!res.ok) {
+            return NextResponse.json({
+                error: {
+                    code: "INTERNAL_ERROR",
+                    message: "Internal server error"
+                }
+            }, { status: 500 })
         }
-    ))
+
+        const json = await res.json()
+
+        list = json.map((value: any) => (
+            {
+                name: value.name,
+                version: value.tag_name,
+                download_count: value.assets[0].download_count,
+                download_url: value.assets[0].browser_download_url,
+                created_at: value.assets[0].created_at
+            }
+        ))
+    } else {
+        list = [{
+            name: "Zipball",
+            version: "zipball",
+            download_count: null,
+            download_url: `https://api.github.com/repos/${mod.repo}/zipball/${mod.branch}`,
+            created_at: mod.updated_at
+        }]
+    }
 
     const start = (page - 1) * limit
     const end = start + limit
