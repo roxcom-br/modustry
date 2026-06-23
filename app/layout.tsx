@@ -2,16 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 
-const adsenseId = process.env.GOOGLE_ADSENSE_ID
-
 export const metadata: Metadata = {
     title: "Modustry",
-    icons: "/icon.jpg",
-    ...(adsenseId && {
-        other: {
-            "google-adsense-account": adsenseId
-        }
-    })
+    icons: "/icon.jpg"
 };
 
 export default function RootLayout({
