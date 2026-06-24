@@ -1,12 +1,10 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import WelcomeModal from "@/components/utils/WelcomeModal";
 import Link from "next/link";
 
 export default function Home() {
     return (
         <main>
-            <WelcomeModal />
             <Navbar />
             <section className="min-h-[90vh] flex flex-col justify-center items-center text-center">
                 <h1 className="text-6xl md:text-8xl font-bold mb-4">The place for Mindustry <br /> <span className="text-(--scheme-color-001)">Mods</span></h1>
