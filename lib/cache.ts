@@ -21,6 +21,32 @@ export const getCache = unstable_cache(
     }
 )
 
+export const getCachePast = unstable_cache(
+    async () => {
+        const commit_res = await fetch("https://api.github.com/repos/Roxxedo/MindustryMods/commits?per_page=100")
+
+        if (!commit_res.ok) {
+            throw new Error(`Erro ao buscar data: ${commit_res.status}`)
+        }
+
+        let commits = await commit_res.json()
+        
+        const res = await fetch(`https://raw.githubusercontent.com/Roxxedo/MindustryMods/${commits[49]["sha"]}/data/mods.json`)
+
+        if (!res.ok) {
+            throw new Error(`Erro ao buscar data: ${res.status}`)
+        }
+
+        let mods = await res.json()
+
+        return mods as Mod[]
+    },
+    ['cache-past'],
+    {
+        revalidate: 300
+    }
+)
+
 export const getVersionsCache = unstable_cache(
     async () => {
         const res = await fetch("https://raw.githubusercontent.com/Roxxedo/MindustryMods/master/data/versions.json")

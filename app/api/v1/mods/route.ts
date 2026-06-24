@@ -1,4 +1,4 @@
-import { getCache } from "@/lib/cache";
+import { getCache, getCachePast } from "@/lib/cache";
 import { parsePositiveInt } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
@@ -12,6 +12,7 @@ export async function GET(request: Request) {
     const version = searchParams.get('version') ?? ""
 
     let mods = await getCache()
+    let modsPast = await getCachePast()
 
     const q = searchParams.get('q')?.toLowerCase() ?? ""
 
@@ -37,6 +38,7 @@ export async function GET(request: Request) {
     if (loader == "java") mods = mods.filter(x => x.has_java)
     if (loader == "script") mods = mods.filter(x => x.has_scripts)
 
+    if (sort == "rising") mods.sort((a, b) => (b.stars - (modsPast.find(x => x.id == b.id)?.stars || 0)) - (a.stars - (modsPast.find(x => x.id == a.id)?.stars || 0)))
     if (sort == "downloads") mods.sort((a, b) => b.downloads - a.downloads)
     if (sort == "date published") mods.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
     if (sort == "date updated") mods.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at))

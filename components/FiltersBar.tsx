@@ -17,7 +17,7 @@ export default function FiltersBar({ sort, onSortChange, limit, onLimitChange }:
                 onChange={(e) => onSortChange(e.target.value)}
                 value={sort}
             >
-                {["Relevance", "Downloads", "Followers", "Date published", "Date updated"].map((value) => (
+                {["Relevance", "Rising", "Downloads", "Date published", "Date updated"].map((value) => (
                     <option key={value} value={value.toLowerCase()}>Sort by: {value}</option>
                 ))}
             </select>
