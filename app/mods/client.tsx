@@ -1,5 +1,6 @@
 'use client'
 
+import { Bridge } from "@/components/bridge/Bridge";
 import FiltersBar from "@/components/FiltersBar";
 import Footer from "@/components/Footer";
 import ModsListElement from "@/components/mods/ModsListElement";
@@ -7,6 +8,7 @@ import ModsSidebarFilters from "@/components/mods/ModsSidebarFilters";
 import Navbar from "@/components/Navbar";
 import Pagination from "@/components/Pagination";
 import SearchBar from "@/components/SearchBar";
+import BridgeModal from "@/components/utils/announcements/BridgeModal";
 import { Mod } from "@/types/mod";
 import { Version } from "@/types/version";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -68,6 +70,8 @@ export default function ModsClient({ data, pagination, query, sort, loader, vers
 
     return (
         <main>
+            <BridgeModal />
+            <Bridge />
             <Navbar />
             <section className="container mx-auto px-4 md:p-0">
                 <div className="flex flex-col md:flex-row gap-4">

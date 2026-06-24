@@ -1,9 +1,49 @@
+"use client"
+
 import { Mod } from "@/types/mod";
 import Link from "next/link";
 import Image from "@/components/utils/Image"
 import { MindustryText } from "../utils/MindustryText";
+import { InstallButton } from "../bridge/InstallButton";
+import { useEffect, useState } from "react";
+import { getBridgeHealth, getInstalledMods } from "@/lib/bridge";
 
 export default function ListElement({ data }: { data: Mod }) {
+    const [active, setActive] = useState(false)
+    const [installedMods, setInstalledMods] = useState<string[]>([])
+
+    useEffect(() => {
+        let cancelled = false;
+
+        async function checkBridge() {
+            const active = await getBridgeHealth();
+
+            if (!cancelled) {
+                setActive(active == "paired")
+            }
+        }
+
+        async function checkInstalledMods() {
+            const mods = await getInstalledMods()
+
+            if (!cancelled) {
+                setInstalledMods(mods || [])
+            }
+        }
+
+        checkBridge()
+        checkInstalledMods()
+
+        setInterval(() => {
+            checkBridge()
+            checkInstalledMods()
+        }, 5000)
+
+        return () => {
+            cancelled = true
+        }
+    }, [])
+
     return (
         <Link
             href={'/mod/' + data.id}
@@ -44,6 +84,8 @@ export default function ListElement({ data }: { data: Mod }) {
                     </p>
                 </div>
             </div>
+
+            {active && <InstallButton id={data.id} version={null} installed={installedMods.includes(data.repo) || false} />}
         </Link>
     )
 }
