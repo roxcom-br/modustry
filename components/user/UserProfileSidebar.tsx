@@ -19,16 +19,21 @@ export default function UserProfileSidebar({ user, totalStars }: { user: User, t
                 <hr className="my-4 border-zinc-200" />
 
                 <div className="flex flex-col gap-1">
-                    {/* <span className="inline-flex items-center gap-1">
-                        <i className="fa-solid fa-download" />
-                        <span className="font-bold">{formatNumber(data.downloads)}</span>
-                        Downloads
-                    </span> */}
                     <span className="inline-flex items-center gap-1">
                         <i className="fa-solid fa-star" />
                         <span className="font-bold">{totalStars}</span>
                         Stars
                     </span>
+                </div>
+
+                <div className="buttons mt-5 flex gap-2">
+                    <a
+                        href={'https://github.com/' + user.username}
+                        className="flex items-center gap-1 rounded-lg px-4 py-2 bg-(--scheme-color-001) text-white transition"
+                    >
+                        <i className="fa-brands fa-github" />
+                        GitHub
+                    </a>
                 </div>
             </div>
         </div>
