@@ -158,11 +158,20 @@ export default function Markdown({ body, repo, branch }: ReadmeProps) {
                                 title={title}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className="text-blue-500"
                             >
                                 {children}
                             </a>
                         );
                     },
+
+                    blockquote({children}) {
+                        return (
+                            <blockquote className="border-l-4 border-(--scheme-color-tertiary) mx-4 px-4">
+                                {children}
+                            </blockquote>
+                        )
+                    }
                 }}
             >
                 {body}

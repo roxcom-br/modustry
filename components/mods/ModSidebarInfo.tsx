@@ -90,8 +90,7 @@ export default function ModSidebarInfo({ data }: ModSidebarInfo) {
                 <ul>
                     <li>
                         <a
-                            href={`https://github.com/${data.repo.split('/')[0]}`}
-                            target="_blank"
+                            href={`/user/${data.author}`}
                             className="inline-flex items-center gap-3"
                         >
                             <img
