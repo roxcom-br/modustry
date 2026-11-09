@@ -76,15 +76,15 @@ export default function ModsClient({ data, pagination, query, sort, loader, vers
             <section className="container mx-auto px-4 md:p-0">
                 <div className="flex flex-col md:flex-row gap-4">
                     <ModsSidebarFilters loader={loader} setLoader={handleLoaderChange} version={version} setVersion={handleVersionChange} versions={versions} />
-                    <div>
+                    <div className="w-full">
                         <SearchBar query={query} onQueryChange={handleQueryChange} />
                         <FiltersBar sort={sort} onSortChange={handleSortChange} limit={pagination.limit} onLimitChange={handleLimitChange} />
                         {data.map((mod: Mod) => (
                             <ModsListElement data={mod} key={mod.repo} />
                         ))}
+                        <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
                     </div>
                 </div>
-                <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
             </section>
             <Footer />
         </main>

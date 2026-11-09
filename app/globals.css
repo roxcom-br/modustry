@@ -22,6 +22,9 @@
     --scheme-color-dark-secondary: #26292f;
     --scheme-color-light-secondary: #fff;
 
+    --scheme-color-dark-tertiary: #414750;
+    --scheme-color-light-tertiary: ;
+
     --scheme-color-disabled: #404040;
 
     /* PROPERTIES */
@@ -29,7 +32,8 @@
     --background: var(--scheme-color-light);
     --color: var(--scheme-color-black);
 
-    --scheme-color-secondary: var(--scheme-color-light-secondary)
+    --scheme-color-secondary: var(--scheme-color-light-secondary);
+    --scheme-color-tertiary: var(--scheme-color-light-tertiary)
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,7 +41,8 @@
         --background: var(--scheme-color-dark);
         --color: var(--scheme-color-white);
 
-        --scheme-color-secondary: var(--scheme-color-dark-secondary)
+        --scheme-color-secondary: var(--scheme-color-dark-secondary);
+        --scheme-color-tertiary: var(--scheme-color-dark-tertiary)
     }
 }
 
