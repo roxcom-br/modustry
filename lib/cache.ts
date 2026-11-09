@@ -67,30 +67,30 @@ export const getVersionsCache = unstable_cache(
 
 export const getServersCache = unstable_cache(
     async () => {
-        const v6res = await fetch("https://raw.githubusercontent.com/Anuken/Mindustry/refs/heads/master/servers_v6.json")
-        const v7res = await fetch("https://raw.githubusercontent.com/Anuken/Mindustry/refs/heads/master/servers_v7.json")
+        const beres = await fetch("https://raw.githubusercontent.com/Anuken/MindustryServerList/refs/heads/main/servers_be.json")
+        const v8res = await fetch("https://raw.githubusercontent.com/Anuken/MindustryServerList/refs/heads/main/servers_v8.json")
 
-        if (!v6res.ok || !v7res.ok) {
+        if (!beres.ok || !v8res.ok) {
             throw new Error(`Erro ao buscar data`)
         }
 
-        let v6 = await v6res.json()
-        let v7 = await v7res.json()
+        let be = await beres.json()
+        let v8 = await v8res.json()
 
-        v6 = v6.map((x: any) => ({
+        be = be.map((x: any) => ({
             id: x.name.replace(/[^a-zA-Z0-9]/g, "").toLowerCase(),
             name: x.name,
             address: x.address,
-            version: "v6"
+            version: "be"
         }))
-        v7 = v7.map((x: any) => ({
+        v8 = v8.map((x: any) => ({
             id: x.name.replace(/[^a-zA-Z0-9]/g, "").toLowerCase(),
             name: x.name,
             address: x.address,
-            version: "v7"
+            version: "v8"
         }))
 
-        return [...v6, ...v7] as Server[]
+        return [...be, ...v8] as Server[]
     },
     ['servers-cache'],
     {
