@@ -17,17 +17,18 @@ async function getData(params: URLSearchParams) {
     return await res.json()
 }
 
-export default async function Servers({ searchParams }: { searchParams: Promise<{ page: string, q: string }> }) {
-    const { page, q } = await searchParams
+export default async function Servers({ searchParams }: { searchParams: Promise<{ page: string, q: string, version: string }> }) {
+    const { page, q, version } = await searchParams
 
     const params = new URLSearchParams()
 
     if (page) params.set('page', String(page))
     if (q) params.set('q', q)
+    if (version) params.set('version', version)
 
     const data = await getData(params)
 
     return (
-        <ServersClient data={data['data']} pagination={data['pagination']} query={q} />
+        <ServersClient data={data['data']} pagination={data['pagination']} query={q} version={version} />
     )
 }
