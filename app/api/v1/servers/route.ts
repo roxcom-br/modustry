@@ -8,6 +8,8 @@ export async function GET(request: Request) {
     const page = parsePositiveInt(searchParams.get('page'), 1)
     const limit = parsePositiveInt(searchParams.get('limit'), 20)
 
+    const version = searchParams.get('version') ?? ""
+
     let servers = await getServersCache()
 
     const q = searchParams.get('q')?.toLowerCase() ?? ""
@@ -15,6 +17,8 @@ export async function GET(request: Request) {
     servers = servers.filter(x =>
         x.name.toLowerCase().includes(q)
     )
+
+    if (version) servers = servers.filter(x => x.version == version)
 
     const start = (page - 1) * limit
     const end = start + limit
