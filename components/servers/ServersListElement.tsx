@@ -21,8 +21,9 @@ export default function ServersListElement({ data }: { data: Server }) {
             />
 
             <div className="flex w-full justify-between gap-2">
-                <div>
+                <div className="flex items-center gap-2">
                     <h3 className="mb-1 inline-block text-xl font-semibold">{data.name}</h3>
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400">{data.version}</span>
                 </div>
             </div>
         </Link>
