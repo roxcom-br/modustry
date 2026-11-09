@@ -120,7 +120,7 @@ http://localhost:3000
 
 ## Roadmap
 
-- [ ] User profile page
+- [x] User profile page
 - [ ] Modpack creator
 - [ ] Multi-language support
 
