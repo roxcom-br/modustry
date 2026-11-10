@@ -8,6 +8,8 @@ export async function GET(request: Request) {
     const page = parsePositiveInt(searchParams.get('page'), 1)
     const limit = parsePositiveInt(searchParams.get('limit'), 20)
 
+    const version = searchParams.get('version') ?? ""
+
     let textures = await getCache()
 
     const q = searchParams.get('q')?.toLowerCase() ?? ""
@@ -25,6 +27,8 @@ export async function GET(request: Request) {
         x.repo.toLowerCase().includes(q) ||
         x.description.toLowerCase().includes(q)
     )
+
+    if (version) textures = textures.filter(x => parseFloat(x.min_game_version) >= parseFloat(version.replace('v', '')))
 
     const start = (page - 1) * limit
     const end = start + limit

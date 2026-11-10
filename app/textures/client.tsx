@@ -6,7 +6,9 @@ import ModsListElement from "@/components/mods/ModsListElement"
 import Navbar from "@/components/Navbar"
 import Pagination from "@/components/Pagination"
 import SearchBar from "@/components/SearchBar"
+import TexturesSidebarFilters from "@/components/textures/TexturesSidebarFilters"
 import { Mod } from "@/types/mod"
+import { Version } from "@/types/version"
 import { useRouter, useSearchParams } from "next/navigation"
 
 type TexturesClient = {
@@ -18,10 +20,12 @@ type TexturesClient = {
         totalPages: number
     },
     query: string,
-    sort: string
+    sort: string,
+    version: string,
+    versions: Version[]
 }
 
-export default function TexturesClient({ data, pagination, query, sort }: TexturesClient) {
+export default function TexturesClient({ data, pagination, query, sort, version, versions }: TexturesClient) {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -49,16 +53,27 @@ export default function TexturesClient({ data, pagination, query, sort }: Textur
         router.push(`/textures?${params.toString()}`)
     }
 
+    function handleVersionChange(version: string) {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set('version', String(version))
+        router.push(`/textures?${params.toString()}`)
+    }
+
     return (
         <main>
             <Navbar />
             <section className="container mx-auto px-4 md:p-0">
-                <SearchBar query={query} onQueryChange={handleQueryChange} />
-                <FiltersBar sort={sort} onSortChange={handleSortChange} limit={pagination.limit} onLimitChange={handleLimitChange} />
-                {data.map((mod: Mod) => (
-                    <ModsListElement data={mod} key={mod.repo} />
-                ))}
-                <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
+                <div className="flex flex-col md:flex-row gap-4">
+                    <TexturesSidebarFilters version={version} setVersion={handleVersionChange} versions={versions} />
+                    <div className="w-full">
+                        <SearchBar query={query} onQueryChange={handleQueryChange} />
+                        <FiltersBar sort={sort} onSortChange={handleSortChange} limit={pagination.limit} onLimitChange={handleLimitChange} />
+                        {data.map((mod: Mod) => (
+                            <ModsListElement data={mod} key={mod.repo} />
+                        ))}
+                        <Pagination page={pagination.page} totalPages={pagination.totalPages} onPageChange={handlePageChange} />
+                    </div>
+                </div>
             </section>
             <Footer />
         </main>
