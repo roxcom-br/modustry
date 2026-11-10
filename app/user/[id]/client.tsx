@@ -12,9 +12,9 @@ export default function UserPageClient({ user, userProjects, userBody }: { user:
     const totalStars = userProjects.data.reduce((acc, crr) => acc + crr.stars, 0)
 
     return (
-        <main>
+        <main className="h-screen">
             <Navbar />
-            <section className="container mx-auto flex flex-col gap-4 md:flex-row px-4 md:p-0">
+            <section className="container mx-auto flex flex-col gap-4 md:flex-row px-4 md:p-0 md:h-[calc(100%-300px)]">
                     <UserProfileSidebar user={user} totalStars={totalStars} />
                     <div className="w-full">
                         <UserProfileNavbar />
